@@ -10,9 +10,12 @@
 
     <title>Weather App</title>
 </head>
-<body class="bg-blue-400">
+<body class="bg-gradient-to-b from-cyan-500 to-blue-500 h-screen">
     <h1 class="text-3xl font-bold underline text-center">Weather Dashboard</h1>
-    <input class="text-center">    
+    <div id="search-wrapper" class="container mx-auto">
+        <input id="city-search" type="search" placeholder="Search your city" class="h-[35px] text-center rounded-md hover:bg-gray-200 p-2 mx-auto">   
+        <button id="go-button" type="button" class="h-[35px] border-solid-black border-2 border-grey-200 rounded-md p-2 mx-auto w-15" aria-label="Go">Go</button>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="./script.js"></script>
 </body>
