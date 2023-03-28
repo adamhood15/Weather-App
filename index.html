@@ -16,8 +16,10 @@
 
 <body class="bg-gradient-to-b from-cyan-500 to-blue-500 h-screen"> 
 
-    <header>
-        <h1 class="text-3xl font-bold text-center m-10 p-3">Weather Dashboard</h1> 
+    <header class="flex flex-wrap">
+        <img src="./assets/weather-icons/animated/cloudy-day-1.svg" class="h-[100px] w-[100px]">
+
+        <h1 class="text-3xl font-bold text-center p-3">Weather Dashboard</h1> 
 
         <div id="search-wrapper" class="m-3 flex justify-center"> 
             <input id="city-search" type="search" placeholder="Search your city" class="h-[35px] text-center rounded-md hover:bg-gray-200 p-2 m-2">  
@@ -26,12 +28,17 @@
     </header>
 
      <main class="flex flex-col items-center">
-        <div id="icon-container" class="">
-            <img src="./assets/weather-icons/animated/cloudy-day-1.svg" class="h-[200px] w-[200px]">
-        </div>
 
         
-        <div id="city-card" class="card bg-gray-200 h-60 w-3/4 rounded opacity-50 hover:opacity-75">
+        <div id="city-card" class="card flex items-center justify-center flex-col bg-gray-200 h-60 w-3/4 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
 
         </div>
     </main>
