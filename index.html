@@ -1,19 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylsheet' href="./assets/reset.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel='stylesheet' href="./assets/style.css">
+<!DOCTYPE html> 
 
-    <title>Weather App</title>
-</head>
-<body class="bg-blue-400">
-    <h1 class="text-3xl font-bold underline text-center">Weather Dashboard</h1>
-    <input class="text-center">    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="./script.js"></script>
-</body>
-</html>
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel='stylsheet' href="./assets/reset.css"> 
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <link rel='stylesheet' href="./assets/style.css"> 
+    <title>Weather App</title> 
+
+</head> 
+
+<body class="bg-gradient-to-b from-cyan-500 to-blue-500 h-screen"> 
+
+    <header>
+        <h1 class="text-3xl font-bold text-center m-10 p-3">Weather Dashboard</h1> 
+
+        <div id="search-wrapper" class="m-3 flex justify-center"> 
+            <input id="city-search" type="search" placeholder="Search your city" class="h-[35px] text-center rounded-md hover:bg-gray-200 p-2 m-2">  
+            <button id="go-button" type="button" class="h-[35px] bg-gray-200 border-solid-black border-2 border-grey-200 rounded-md p-1 px-2 m-2 w-15" aria-label="Go">Go</button> 
+        </div> 
+    </header>
+
+     <main class="flex flex-col items-center">
+        <div id="icon-container" class="">
+            <img src="./assets/weather-icons/animated/cloudy-day-1.svg" class="h-[200px] w-[200px]">
+        </div>
+
+        
+        <div id="city-card" class="card bg-gray-200 h-60 w-3/4 rounded opacity-50 hover:opacity-75">
+
+        </div>
+    </main>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
+
+     <script src="./script.js"></script> 
+
+</body> 
+
+</html> 
+
+ 
