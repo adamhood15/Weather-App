@@ -21,8 +21,29 @@ function citySearch (event) {
 
     }
 
-}
+    createCityBtn();
 
+}
+//NOT FINISHED YET
+function createCityBtn() {
+
+    for (i = 0; i < prevCities.length; i++) {
+
+        var cityBtnSection = $('#saved-cities');
+        var cityBtn = document.createElement('button').ariaHasPopup({
+                type: 'button',
+                innterHTML: prevCities[i],
+                class: ''
+        });
+
+        var newCity = cityBtn.attr(prevCities[i]);
+
+        cityBtnSection.append(newCity);
+
+
+    }
+
+}
 //Go button will initiate the API call
 
 //The API call will automatically update the City name, icon, and weather forecast for all weather cards
