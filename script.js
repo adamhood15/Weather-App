@@ -1,4 +1,5 @@
 var goBtn = $('#go-button');
+var clearBtn = $('#clear-button')
 
 var prevCities = [];
 
@@ -7,7 +8,7 @@ var prevCities = [];
 //Search for a city using the search bar
 function citySearch (event) {
 
-    var city = $('#city-search').val();
+    var city = $('#city-search').val().toUpperCase();
 
     if (localStorage.getItem('city')) {
 
@@ -30,18 +31,19 @@ function createCityBtn() {
     for (i = 0; i < prevCities.length; i++) {
 
         var cityBtnSection = $('#saved-cities');
-        var cityBtn = document.createElement('button').ariaHasPopup({
-                type: 'button',
-                innterHTML: prevCities[i],
-                class: ''
-        });
-
-        var newCity = cityBtn.attr(prevCities[i]);
-
-        cityBtnSection.append(newCity);
-
+        var cityBtn = $("<button></button>").text(prevCities[i]);
+        
+        cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
 
     }
+
+    cityBtnSection.append(cityBtn);
+
+}
+
+function clearCities() {
+
+    $('.city').remove();
 
 }
 //Go button will initiate the API call
@@ -52,3 +54,4 @@ function createCityBtn() {
 
 //Add event listener for buttons
 goBtn.on('click', citySearch);
+clearBtn.on('click', clearCities);
