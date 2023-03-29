@@ -1,22 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylsheet' href="./assets/reset.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel='stylesheet' href="./assets/style.css">
+<!DOCTYPE html> 
 
-    <title>Weather App</title>
-</head>
-<body class="bg-gradient-to-b from-cyan-500 to-blue-500 h-screen">
-    <h1 class="text-3xl font-bold underline text-center">Weather Dashboard</h1>
-    <div id="search-wrapper" class="container mx-auto">
-        <input id="city-search" type="search" placeholder="Search your city" class="h-[35px] text-center rounded-md hover:bg-gray-200 p-2 mx-auto">   
-        <button id="go-button" type="button" class="h-[35px] border-solid-black border-2 border-grey-200 rounded-md p-2 mx-auto w-15" aria-label="Go">Go</button>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="./script.js"></script>
-</body>
-</html>
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel='stylsheet' href="./assets/reset.css"> 
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <link rel='stylesheet' href="./assets/style.css"> 
+    <title>Weather App</title> 
+
+</head> 
+
+<body class="bg-gradient-to-b from-cyan-500 to-blue-500 min-h-screen"> 
+
+    <header class="flex justify-center flex-wrap align-middle">
+        <img src="./assets/weather-icons/animated/cloudy-day-1.svg" class="h-[100px] w-[100px]">
+
+        <h1 class="text-3xl font-bold text-center pt-5 px-3 pb-3">Weather Dashboard</h1> 
+        <!-- Holds search bar and the Go Button -->
+        <div id="search-wrapper" class="m-3 flex justify-center"> 
+            <input id="city-search" type="search" placeholder="Search your city" class="h-[35px] text-center rounded-md hover:bg-gray-200 p-2 m-2">  
+            <button id="go-button" type="button" class="h-[35px] bg-gray-200 border-solid-black border-2 border-grey-200 rounded-md p-1 px-2 m-2 w-15" aria-label="Go">Go</button> 
+        </div> 
+
+
+    </header>
+    <section id="saved-cities" class="flex justify-center m-3">
+            <button id='prev-city' type="button" class="bg-gray-200 border-2 border-grey-300 rounded m-2 p-1">City Name</button>
+    </section>
+    <!-- Holds all weather cards for current day and the 5 day forecast -->
+     <main >
+
+        
+        <div id="city-card" 
+            class="card m-3 flex items-center justify-center flex-col  
+            bg-gray-200 h-60 w-9/12 m-auto lg:w-5/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">Today</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+
+        <!-- Starts the 5 day Forecast -->
+            <h2 id="forecast-header" class="block text-center m-5 font-bold text-2xl">5-Day Forecast</h2>
+
+        <section id="forecast-section" class="flex flex-wrap justify-center">
+        <div id="city-card" class="card m-3 flex  items-center justify-center flex-col bg-gray-200 h-60 w-9/12 md:w-1/3 lg:w-1/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+
+        <div id="city-card" class="card m-3 flex  items-center justify-center flex-col bg-gray-200 h-60 w-9/12 md:w-1/3 lg:w-1/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+
+        <div id="city-card" class="card m-3 flex  items-center justify-center flex-col bg-gray-200 h-60 w-9/12 md:w-1/3 lg:w-1/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+
+        <div id="city-card" class="card m-3 flex  items-center justify-center flex-col bg-gray-200 h-60 w-9/12 md:w-1/3 lg:w-1/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+
+        <div id="city-card" class="card m-3 flex  items-center justify-center flex-col bg-gray-200 h-60 w-9/12 md:w-1/3 lg:w-1/6 rounded opacity-75 hover:opacity-100">
+            <h2 class="city-name font-bold text-2xl">Houston</h2>
+            <h3 class="date font-bold text-lg">March 28th, 2023</h3>
+            <img class="city-weather-icon h-[80px] w-[80px]" src="./assets/weather-icons/animated/rainy-1.svg">
+            <ul class="text-lg">
+                <li class="temp">77 Degrees</li>
+                <li class="forecast">Cloudy</li>
+                <li class="wind">Wind: 5 MPH</li>
+            </ul>
+
+        </div>
+    </section>
+
+    </main>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
+
+     <script src="./script.js"></script> 
+
+</body> 
+
+</html> 
+
+ 
