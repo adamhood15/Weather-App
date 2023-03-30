@@ -61,15 +61,13 @@ function weatherApiCall(lat, lon) {
             console.log(data.list);
             var cityName = data.city.name;
 
-
+            //Pushes the temp, weather description and wind to an array so that we can loop through it later
             for (i = 0; i < 40; i += 8) {
                 temp.push(Math.round(data.list[i].main.temp) + '\u00B0 Farenheit');
                 weather.push(data.list[i].weather[0].description);
                 wind.push('Wind: ' + Math.round(data.list[i].wind.speed) + 'MPH');
             }
-            console.log(temp);
-            console.log(weather);
-            console.log(wind);
+
             //passes the data to the display weather function
             displayWeather(cityName, temp, weather, wind);
         })
