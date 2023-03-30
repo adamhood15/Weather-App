@@ -1,45 +1,64 @@
 var goBtn = $('#go-button');
 var clearBtn = $('#clear-button')
 
+var latLon = [];
 var prevCities = [];
 
 //Connect the API to retrieve weather data
+function geoApiCall() {
+    latLon = [];
+    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchInput + '&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
 
-//Search for a city using the search bar
+fetch (geoLocationUrl) 
+    .then (function (response) {
+        return response.json();
+    })
+    .then (function (data) {
+        console.log(data);
+        var lat = data[0].lat
+        var lon = data[0].lon
+        latLon.push(lat);
+        latLon.push(lon);
+      
+        console.log(latLon);
+    })
+
+    var latitude = latLon[0];
+    var longitude = latLon[1];
+
+    weatherUrl = 'api.openweathermap.org/data/2.5/forecast?lat=29.5636&lon=95.2860&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+
+fetch (weatherUrl) 
+    .then (function (response) {
+        return response.json();
+    })
+    .then (function (data) {
+        console.log(data);
+    })
+}
+
 function citySearch (event) {
 
-    var city = $('#city-search').val().toUpperCase();
+    searchInput = $('#city-search').val();
 
-    if (localStorage.getItem('city')) {
-
-        prevCities.push(localStorage.getItem('city'));
-        localStorage.setItem('city', city);
-    
-    } else {
-
-        localStorage.setItem('city', city);
-        prevCities.push(localStorage.getItem('city'));
-
-    }
-
-    createCityBtn();
+    geoApiCall();
 
 }
-//NOT FINISHED YET
-function createCityBtn() {
+//Need to add api link when finished.
+// function createCityBtn() {
 
-    for (i = 0; i < prevCities.length; i++) {
+//     for (i = 0; i < prevCities.length; i++) {
 
-        var cityBtnSection = $('#saved-cities');
-        var cityBtn = $("<button></button>").text(prevCities[i]);
+//         var cityBtnSection = $('#saved-cities');
+//         var cityBtn = $("<button></button>").text(prevCities[i]);
         
-        cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
+//         cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
 
-    }
+//     }
 
-    cityBtnSection.append(cityBtn);
+//     cityBtnSection.append(cityBtn);
 
-}
+// }
 
 function clearCities() {
 
