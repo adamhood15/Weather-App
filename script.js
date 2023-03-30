@@ -1,32 +1,30 @@
 var goBtn = $('#go-button');
 var clearBtn = $('#clear-button')
 
-var latLon = [];
 var prevCities = [];
 
 //Connect the API to retrieve weather data
-function geoApiCall() {
+//Gives latitude and longitude of city based on zip code
+function geoApiCall(cityZip) {
+
     latLon = [];
-    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchInput + '&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + cityZip + '&appid=a0334750ce53b3a2b2d0193e97ee40fc'
 
 fetch (geoLocationUrl) 
     .then (function (response) {
         return response.json();
     })
     .then (function (data) {
-        console.log(data);
-        var lat = data[0].lat
-        var lon = data[0].lon
-        latLon.push(lat);
-        latLon.push(lon);
-      
-        console.log(latLon);
+        var lat = data.lat
+        var lon = data.lon
+        weatherApiCall(lat, lon);
     })
 
-    var latitude = latLon[0];
-    var longitude = latLon[1];
+}
 
-    weatherUrl = 'api.openweathermap.org/data/2.5/forecast?lat=29.5636&lon=95.2860&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+function weatherApiCall(lat, lon) {
+weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a0334750ce53b3a2b2d0193e97ee40fc&units=imperial'
+
 
 fetch (weatherUrl) 
     .then (function (response) {
@@ -34,14 +32,16 @@ fetch (weatherUrl)
     })
     .then (function (data) {
         console.log(data);
+        console.log(data.list);
     })
+
 }
 
 function citySearch (event) {
 
     searchInput = $('#city-search').val();
 
-    geoApiCall();
+    geoApiCall(searchInput);
 
 }
 //Need to add api link when finished.
