@@ -1,10 +1,14 @@
 var goBtn = $('#go-button');
-var clearBtn = $('#clear-button')
-
-var weatherCards = [$('#city-card-0'), $('#city-card-1'), $('#city-card-2'), $('#city-card-3'), $('#city-card-4'), $('#city-card-5')];
+var clearBtn = $('#clear-button');
+var todayWeather = $('#city-card-0');
+var weatherCards = [$('#city-card-1'), $('#city-card-2'), $('#city-card-3'), $('#city-card-4'), $('#city-card-5')];
 
 var prevCities = [];
 var fiveDays = [];
+var temp = [];
+var weather = [];
+var wind = [];
+
 
 //Sets the date for each weather card
 document.addEventListener("DOMContentLoaded", function() {
@@ -51,14 +55,22 @@ function weatherApiCall(lat, lon) {
         .then (function (response) {
             return response.json();
         })
-        
+        //Grabs the weather data and store them in variables
         .then (function (data) {
             console.log(data);
             console.log(data.list);
             var cityName = data.city.name;
-            var temp = Math.round(data.list[0].main.temp) + '\u00B0 Farenheit';
-            var weather = data.list[0].weather[0].description;
-            var wind = 'Wind: ' + Math.round(data.list[0].wind.speed) + 'MPH';
+
+
+            for (i = 0; i < 40; i += 8) {
+                temp.push(Math.round(data.list[i].main.temp) + '\u00B0 Farenheit');
+                weather.push(data.list[i].weather[0].description);
+                wind.push('Wind: ' + Math.round(data.list[i].wind.speed) + 'MPH');
+            }
+            console.log(temp);
+            console.log(weather);
+            console.log(wind);
+            //passes the data to the display weather function
             displayWeather(cityName, temp, weather, wind);
         })
 
@@ -68,11 +80,19 @@ function weatherApiCall(lat, lon) {
 
 function displayWeather(cityName, temp, weather, wind) {
 
+    //Today's forecast must be separate from the loop since there are two cards with the same information
+    todayWeather.children('.city-name').text(cityName);
+    todayWeather.children('.weather-info').children('.temp').text(temp[0]);
+    todayWeather.children('.weather-info').children('.forecast').text(weather[0]);
+    todayWeather.children('.weather-info').children('.wind').text(wind[0]);
+    
+
+    //Loop for the 5 day forecast
     for (i=0; i < weatherCards.length; i++) {
-    weatherCards[i].children('.city-name').text(cityName);
-    weatherCards[i].children('.weather-info').children('.temp').text(temp);
-    weatherCards[i].children('.weather-info').children('.forecast').text(weather);
-    weatherCards[i].children('.weather-info').children('.wind').text(wind);
+        weatherCards[i].children('.city-name').text(cityName);
+        weatherCards[i].children('.weather-info').children('.temp').text(temp[i]);
+        weatherCards[i].children('.weather-info').children('.forecast').text(weather[i]);
+        weatherCards[i].children('.weather-info').children('.wind').text(wind[i]);
     }
 
 
