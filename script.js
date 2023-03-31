@@ -32,18 +32,17 @@ document.addEventListener("DOMContentLoaded", function() {
 //Stores the search value and passes it to the geo api call function
 function citySearch (event) {
 
-    searchInput = $('#city-search').val();
+    cityName = $('#city-search').val();
 
-    geoApiCall(searchInput);
+    geoApiCall(cityName);
 
 }
 
 //Gives latitude and longitude of city based on zip code
-function geoApiCall(cityZip) {
+function geoApiCall(cityName) {
     //API URL
-    var url = 'http://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+    var url = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
     
-    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + cityZip + '&appid=a0334750ce53b3a2b2d0193e97ee40fc'
 
     fetch (url) 
         .then (function (response) {
