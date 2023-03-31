@@ -81,6 +81,8 @@ function weatherApiCall(lat, lon) {
             }
 
             //passes the data to the display weather function
+            var cityName = cityName.toUpperCase();
+            createCityBtn(cityName);
             displayWeather(cityName, temp, weather, wind);
         })
 
@@ -106,14 +108,29 @@ function displayWeather(cityName, temp, weather, wind) {
 
 }
 
-function createCityBtn() {
+function createCityBtn(cityName) {
 
-    
+    //Look in local storage and grab previous cities and put them in prevCities array
+
+
+
+    prevCities.push('London');
+    prevCities.push('Beijing');
+    localStorage.setItem('city', JSON.stringify(prevCities));
+
+
+
+    console.log(JSON.parse(localStorage.getItem('city')));
+
+    localStorage.setItem('city', prevCities);
 
     for (i = 0; i < prevCities.length; i++) {
 
         var cityBtnSection = $('#saved-cities');
-        var cityBtn = $("<button></button>").text(prevCities[i]);
+
+
+        if (cityName)
+        var cityBtn = $("<button></button>").text(cityName);
         
         cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
 
