@@ -29,19 +29,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
   });
 
+//Stores the search value and passes it to the geo api call function
+function citySearch (event) {
+
+    searchInput = $('#city-search').val();
+
+    geoApiCall(searchInput);
+
+}
+
 //Gives latitude and longitude of city based on zip code
 function geoApiCall(cityZip) {
     //API URL
+    var url = 'http://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+    
     geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + cityZip + '&appid=a0334750ce53b3a2b2d0193e97ee40fc'
 
-    fetch (geoLocationUrl) 
+    fetch (url) 
         .then (function (response) {
             return response.json();
         })
         //Stores the latitude and longitude and then passes it to the weather api call
         .then (function (data) {
-            var lat = data.lat
-            var lon = data.lon
+            console.log(data);
+            var lat = data[0].lat
+            var lon = data[0].lon
+            console.log(lat, lon);
             weatherApiCall(lat, lon);
         })
 
@@ -57,7 +70,7 @@ function weatherApiCall(lat, lon) {
         })
         //Grabs the weather data and store them in variables
         .then (function (data) {
-            console.log(data);
+            data.city.name;
             console.log(data.list);
             var cityName = data.city.name;
 
@@ -74,8 +87,7 @@ function weatherApiCall(lat, lon) {
 
 }
 
-// for (i=0; i < )
-
+//Updates the weather name, temp, description, and wind for each card
 function displayWeather(cityName, temp, weather, wind) {
 
     //Today's forecast must be separate from the loop since there are two cards with the same information
@@ -93,31 +105,24 @@ function displayWeather(cityName, temp, weather, wind) {
         weatherCards[i].children('.weather-info').children('.wind').text(wind[i]);
     }
 
-
 }
 
-function citySearch (event) {
+function createCityBtn() {
 
-    searchInput = $('#city-search').val();
+    
 
-    geoApiCall(searchInput);
+    for (i = 0; i < prevCities.length; i++) {
 
-}
-//Need to add api link when finished.
-// function createCityBtn() {
-
-//     for (i = 0; i < prevCities.length; i++) {
-
-//         var cityBtnSection = $('#saved-cities');
-//         var cityBtn = $("<button></button>").text(prevCities[i]);
+        var cityBtnSection = $('#saved-cities');
+        var cityBtn = $("<button></button>").text(prevCities[i]);
         
-//         cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
+        cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
 
-//     }
+    }
 
-//     cityBtnSection.append(cityBtn);
+    cityBtnSection.append(cityBtn);
 
-// }
+}
 
 function clearCities() {
 
