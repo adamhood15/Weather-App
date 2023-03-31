@@ -4,6 +4,7 @@ var todayWeather = $('#city-card-0');
 var weatherCards = [$('#city-card-1'), $('#city-card-2'), $('#city-card-3'), $('#city-card-4'), $('#city-card-5')];
 
 var prevCities = [];
+var currentCities = [];
 var fiveDays = [];
 var temp = [];
 var weather = [];
@@ -35,6 +36,28 @@ function citySearch (event) {
     cityName = $('#city-search').val();
 
     geoApiCall(cityName);
+    storeCities(cityName);
+
+}
+
+function storeCities (cityName) {
+    //Store city name as upper case
+    var cityNameUpper = cityName.toUpperCase();
+    //pushes current city to array
+    prevCities.push(cityNameUpper);
+    //checks if local storage has a city value
+    if (localStorage.getItem('city')) {
+        //pulls the city value as an array and stores it
+        var cityStorage = JSON.parse(localStorage.getItem('city'));
+        //pushes each item of that array to the array
+        for (i = 0; i < cityStorage.length; i++) {
+
+            prevCities.push(cityStorage[i]);
+        }
+
+    }
+    //Sets city value to the city array
+    localStorage.setItem('city', JSON.stringify(prevCities));
 
 }
 
@@ -50,10 +73,8 @@ function geoApiCall(cityName) {
         })
         //Stores the latitude and longitude and then passes it to the weather api call
         .then (function (data) {
-            console.log(data);
             var lat = data[0].lat
             var lon = data[0].lon
-            console.log(lat, lon);
             weatherApiCall(lat, lon);
         })
 
@@ -70,7 +91,6 @@ function weatherApiCall(lat, lon) {
         //Grabs the weather data and store them in variables
         .then (function (data) {
             data.city.name;
-            console.log(data.list);
             var cityName = data.city.name;
 
             //Pushes the temp, weather description and wind to an array so that we can loop through it later
@@ -81,9 +101,10 @@ function weatherApiCall(lat, lon) {
             }
 
             //passes the data to the display weather function
-            var cityName = cityName.toUpperCase();
-            createCityBtn(cityName);
             displayWeather(cityName, temp, weather, wind);
+            var cityName = cityName.toUpperCase();
+            //createCityBtn(cityName);
+
         })
 
 }
@@ -108,41 +129,49 @@ function displayWeather(cityName, temp, weather, wind) {
 
 }
 
-function createCityBtn(cityName) {
+// function createCityBtn(cityName) {
 
-    //Look in local storage and grab previous cities and put them in prevCities array
+//     //Look in local storage and grab previous cities and put them in prevCities array
 
+//    
 
+//     if (localStorage.getItem('city')) {
 
-    prevCities.push('London');
-    prevCities.push('Beijing');
-    localStorage.setItem('city', JSON.stringify(prevCities));
+//         for (i=0; i < cityStorage.length; i++) {
+//         prevCities.push(cityStorage[i]);
+//         console.log(prevCities);
+//     }
+//     prevCities.push(cityName);
+//     console.log(prevCities);
 
-
-
-    console.log(JSON.parse(localStorage.getItem('city')));
-
-    localStorage.setItem('city', prevCities);
-
-    for (i = 0; i < prevCities.length; i++) {
-
-        var cityBtnSection = $('#saved-cities');
+    
+//     localStorage.setItem('city', JSON.stringify(prevCities));
 
 
-        if (cityName)
-        var cityBtn = $("<button></button>").text(cityName);
+//     console.log(JSON.parse(localStorage.getItem('city')));
+
+//     localStorage.setItem('city', JSON.stringify(prevCities));
+
+//     for (i = 0; i < prevCities.length; i++) {
+
+//         var cityBtnSection = $('#saved-cities');
+
+
+//         if (cityName)
+//         var cityBtn = $("<button></button>").text(cityName);
         
-        cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
+//         cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
 
-    }
+//     }}
 
-    cityBtnSection.append(cityBtn);
+//     cityBtnSection.append(cityBtn);
 
-}
+// }
 
 function clearCities() {
 
     $('.city').remove();
+    localStorage.removeItem('city');
 
 }
 //Go button will initiate the API call
