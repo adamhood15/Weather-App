@@ -2,6 +2,7 @@ var goBtn = $('#go-button');
 var clearBtn = $('#clear-button');
 var todayWeather = $('#city-card-0');
 var weatherCards = [$('#city-card-1'), $('#city-card-2'), $('#city-card-3'), $('#city-card-4'), $('#city-card-5')];
+var savedCitySection = $('#saved-cities');
 
 var prevCities = [];
 var currentCities = [];
@@ -28,6 +29,25 @@ document.addEventListener("DOMContentLoaded", function() {
     $('#date-4').text(fiveDays[3])
     $('#date-5').text(fiveDays[4])
 
+    geoApiCall('houston');
+
+    //Displays the current saved cities from local storage as buttons
+    for (i = 0; i < JSON.parse(localStorage.getItem('city')).length; i++) {
+
+        var button = $('<button>' + JSON.parse(localStorage.getItem('city'))[i] + '</button>');
+        button.addClass('city-button h-[35px] bg-gray-200 border-solid-black border-2 border-grey-200 rounded-md p-1 px-2 m-2 w-15');
+        savedCitySection.append(button);
+
+    };
+    //Grabs all city buttons that were rendered on page load
+    var cityBtns = $('.city-button')
+
+    //passes the text from the button to the geo api call
+    cityBtns.on('click', function (event) {
+        geoApiCall(event.target.textContent);
+    })
+
+
   });
 
 //Stores the search value and passes it to the geo api call function
@@ -40,22 +60,31 @@ function citySearch (event) {
 
 }
 
+// if (getHiScore) {
+//     highScoreArray = (JSON.parse(getHiScore));
+// }
+// highScoreArray.push(highScore);
+// localStorage.setItem('High Score List', JSON.stringify(highScoreArray));
+
 function storeCities (cityName) {
-    //Store city name as upper case
+
     var cityNameUpper = cityName.toUpperCase();
-    //pushes current city to array
-    prevCities.push(cityNameUpper);
-    //checks if local storage has a city value
+
+
     if (localStorage.getItem('city')) {
-        //pulls the city value as an array and stores it
+
         var cityStorage = JSON.parse(localStorage.getItem('city'));
-        //pushes each item of that array to the array
+        console.log(cityStorage);
+
         for (i = 0; i < cityStorage.length; i++) {
 
             prevCities.push(cityStorage[i]);
+    
         }
 
     }
+
+    prevCities.push(cityNameUpper);
     //Sets city value to the city array
     localStorage.setItem('city', JSON.stringify(prevCities));
 
@@ -102,8 +131,6 @@ function weatherApiCall(lat, lon) {
 
             //passes the data to the display weather function
             displayWeather(cityName, temp, weather, wind);
-            var cityName = cityName.toUpperCase();
-            //createCityBtn(cityName);
 
         })
 
@@ -128,45 +155,6 @@ function displayWeather(cityName, temp, weather, wind) {
     }
 
 }
-
-// function createCityBtn(cityName) {
-
-//     //Look in local storage and grab previous cities and put them in prevCities array
-
-//    
-
-//     if (localStorage.getItem('city')) {
-
-//         for (i=0; i < cityStorage.length; i++) {
-//         prevCities.push(cityStorage[i]);
-//         console.log(prevCities);
-//     }
-//     prevCities.push(cityName);
-//     console.log(prevCities);
-
-    
-//     localStorage.setItem('city', JSON.stringify(prevCities));
-
-
-//     console.log(JSON.parse(localStorage.getItem('city')));
-
-//     localStorage.setItem('city', JSON.stringify(prevCities));
-
-//     for (i = 0; i < prevCities.length; i++) {
-
-//         var cityBtnSection = $('#saved-cities');
-
-
-//         if (cityName)
-//         var cityBtn = $("<button></button>").text(cityName);
-        
-//         cityBtn.addClass('bg-gray-200 border-2 border-grey-300 rounded m-2 p-1 city');
-
-//     }}
-
-//     cityBtnSection.append(cityBtn);
-
-// }
 
 function clearCities() {
 
