@@ -70,7 +70,6 @@ function storeCities (cityName) {
 
     var cityNameUpper = cityName.toUpperCase();
 
-
     if (localStorage.getItem('city')) {
 
         var cityStorage = JSON.parse(localStorage.getItem('city'));
@@ -158,7 +157,7 @@ function displayWeather(cityName, temp, weather, wind) {
 
 function clearCities() {
 
-    $('.city').remove();
+    $('.city-button').remove();
     localStorage.removeItem('city');
 
 }
