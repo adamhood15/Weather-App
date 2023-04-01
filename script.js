@@ -5,10 +5,10 @@ var prevCities = [];
 
 //Connect the API to retrieve weather data
 //Gives latitude and longitude of city based on zip code
-function geoApiCall(cityName) {
+function geoApiCall(cityZip) {
 
     latLon = [];
-    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + cityName + '&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+    geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + cityZip + '&appid=a0334750ce53b3a2b2d0193e97ee40fc'
 
 fetch (geoLocationUrl) 
     .then (function (response) {
