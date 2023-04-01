@@ -12,6 +12,7 @@ var weather = [];
 var wind = [];
 
 
+
 //Sets the date for each weather card
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -29,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
     $('#date-4').text(fiveDays[3])
     $('#date-5').text(fiveDays[4])
 
-    geoApiCall('houston');
+
+
+    geoApiCall(JSON.parse(localStorage.getItem('city'))[JSON.parse(localStorage.getItem('city')).length-1]);
 
     //Displays the current saved cities from local storage as buttons
     for (i = 0; i < JSON.parse(localStorage.getItem('city')).length; i++) {
@@ -57,7 +60,7 @@ function citySearch (event) {
 
     geoApiCall(cityName);
     storeCities(cityName);
-
+    window.location.reload();
 }
 
 // if (getHiScore) {
