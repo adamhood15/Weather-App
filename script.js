@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var cityInStorage = JSON.parse(localStorage.getItem('city'));
     var buttonText = localStorage.getItem('button');
 
-    //Checks to see if you clicked a button to search for a city or you used the search bar
+    //Checks to see if you clicked a button to search for a city or you used the search bar or if you got to the page for the first time
     if ( jQuery.inArray(buttonText, cityInStorage) !== -1) {
 
             geoApiCall(localStorage.getItem('button'));
@@ -121,12 +121,7 @@ function citySearch (city) {
     window.location.reload();
 }
 
-// if (getHiScore) {
-//     highScoreArray = (JSON.parse(getHiScore));
-// }
-// highScoreArray.push(highScore);
-// localStorage.setItem('High Score List', JSON.stringify(highScoreArray));
-
+//Stores all the search values as cities in local storage so that we can dynamically create city buttons
 function storeCities (cityName) {
 
     var cityNameUpper = cityName.toUpperCase();
