@@ -11,6 +11,7 @@ var fiveDays = [];
 var temp = [];
 var weather = [];
 var wind = [];
+var humidity = [];
 var iconId= [];
 
 //Assigns each weather id code to the specified custom icon in the file
@@ -188,6 +189,7 @@ function weatherApiCall(lat, lon) {
         .then (function (data) {
             data.city.name;
             var cityName = data.city.name;
+            console.log(data.list[0].main.humidity);
 
             //Pushes the temp, weather description and wind to an array so that we can loop through it later
             for (i = 0; i < 40; i += 8) {
@@ -195,24 +197,28 @@ function weatherApiCall(lat, lon) {
                 weather.push(data.list[i].weather[0].description);
                 wind.push('Wind: ' + Math.round(data.list[i].wind.speed) + 'MPH');
                 iconId.push(data.list[i].weather[0].id);
+                humidity.push('Humidity: ' + data.list[i].main.humidity + '%');
             }
 
             //passes the data to the display weather function
-            displayWeather(cityName, temp, weather, wind, iconId);
+            displayWeather(cityName, temp, weather, wind, iconId, humidity);
 
         })
 
 }
 
 //Updates the weather name, temp, description, and wind for each card
-function displayWeather(cityName, temp, weather, wind, iconId) {
+function displayWeather(cityName, temp, weather, wind, iconId, humidity) {
 
     //Today's forecast must be separate from the loop since there are two cards with the same information
     todayWeather.children('.city-name').text(cityName);
     todayWeather.children('.weather-info').children('.temp').text(temp[0]);
     todayWeather.children('.weather-info').children('.forecast').text(weather[0]);
     todayWeather.children('.weather-info').children('.wind').text(wind[0]);
-    
+    todayWeather.children('.city-weather-icon').attr('src', weatherIconId[iconId[0]]);
+    todayWeather.children('.weather-info').children('.humidity').text(humidity[0]);
+
+    console.log(humidity);
 
     //Loop for the 5 day forecast
     for (i=0; i < weatherCards.length; i++) {
@@ -221,6 +227,8 @@ function displayWeather(cityName, temp, weather, wind, iconId) {
         weatherCards[i].children('.weather-info').children('.forecast').text(weather[i]);
         weatherCards[i].children('.weather-info').children('.wind').text(wind[i]);
         weatherCards[i].children('.city-weather-icon').attr('src', weatherIconId[iconId[i]])
+        weatherCards[i].children('.weather-info').children('.humidity').text(humidity[i]);
+
     }
 
 }
