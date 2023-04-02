@@ -155,7 +155,7 @@ function storeCities (cityName) {
 //Gives latitude and longitude of city based on zip code
 function geoApiCall(cityName) {
     //API URL
-    var url = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
+    var url = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=a0334750ce53b3a2b2d0193e97ee40fc'
     
 
     fetch (url) 
