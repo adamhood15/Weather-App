@@ -3,6 +3,7 @@ var clearBtn = $('#clear-button');
 var todayWeather = $('#city-card-0');
 var weatherCards = [$('#city-card-1'), $('#city-card-2'), $('#city-card-3'), $('#city-card-4'), $('#city-card-5')];
 var savedCitySection = $('#saved-cities');
+var form = $('#form');
 
 var prevCities = [];
 var currentCities = [];
@@ -233,6 +234,6 @@ function clearCities() {
 
 
 //Add event listener for buttons
-goBtn.on('click', citySearch);
+form.on('submit', citySearch);
 clearBtn.on('click', clearCities);
 
