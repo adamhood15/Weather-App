@@ -72,12 +72,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
             geoApiCall(localStorage.getItem('button'));
 
-    } else if (!buttonText) {
+    } else if (cityInStorage) {
+        geoApiCall(cityInStorage[cityInStorage.length-1]);
+    } 
+    
+    else if (!buttonText) {
         geoApiCall('houston');
     }
-    else {
-        geoApiCall(cityInStorage[cityInStorage.length-1]);
-    }
+    
 
 
     if (cityInStorage) {
@@ -114,6 +116,7 @@ function citySearch (city) {
         
     } else {
         cityName = $('#city-search').val();
+        localStorage.removeItem('button');
     }
 
     geoApiCall(cityName);
@@ -129,7 +132,6 @@ function storeCities (cityName) {
     if (localStorage.getItem('city')) {
 
         var cityStorage = JSON.parse(localStorage.getItem('city'));
-        console.log(cityStorage);
 
         for (i = 0; i < cityStorage.length; i++) {
 
@@ -157,7 +159,9 @@ function geoApiCall(cityName) {
 
     fetch (url) 
         .then (function (response) {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } throw new Error('Something went wrong');
         })
         //Stores the latitude and longitude and then passes it to the weather api call
         .then (function (data) {
@@ -165,6 +169,9 @@ function geoApiCall(cityName) {
             var lon = data[0].lon
             weatherApiCall(lat, lon);
         })
+        .catch((error) => {
+            console.log(error);
+        });
 
 }
 //Uses latitude and longitude parameters from geo call to find weather data for that city
