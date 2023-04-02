@@ -8,7 +8,7 @@ There is no installation required for this application. Just follow the URL prov
 # Usage
 Go to the URL provided to access the web application: https://adamhood15.github.io/weather-app/? 
 
-![Webpage screenshot](./assets/webpage-screenshot/Screenshot%202023-04-02%20112000.png)
+![Webpage screenshot](./assets/webpage-screenshot/Screenshot%202023-04-02%20122757.png)
 
 ## Credits
 Weather icons were provided by https://github.com/Makin-Things/weather-icons 
